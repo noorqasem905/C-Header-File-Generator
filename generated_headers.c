@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <ctype.h>
-#include "get_next_line.h"
+#include "libft/libft.h"
 
 #define MAX_PROTOTYPES 1024
 #define MAX_LINE_LEN 1024
@@ -31,7 +31,7 @@ int	is_function_signature(const char *line)
 {
 	if (!line || line[0] == '\n' || line[0] == ' ' || line[0] == '\t')
 		return (0);
-	if (strncmp(line, "static ", 7) == 0)
+	if (ft_strncmp(line, "static ", 7) == 0)
 		return (0);
 	if (strstr(line, "//") || strstr(line, "/*") || strstr(line, "*/"))
 		return (0);
@@ -57,9 +57,9 @@ int	extract_prototype(const char *line, t_prototype *p)
 	newline = strchr(buffer, '\n');
 	if (newline)
 		*newline = '\0';
-	if (strlen(buffer) < 3)
+	if (ft_strlen(buffer) < 3)
 		return (0);
-	paren = strchr(buffer, '(');
+	paren = ft_strchr(buffer, '(');
 	if (!paren)
 		return (0);
 	i = paren - buffer;
